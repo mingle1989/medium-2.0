@@ -3,6 +3,7 @@ import { previewData } from 'next/headers';
 import PreviewBlogList from '../(admin)/PreviewBlogList';
 import PreviewSuspense from '../(admin)/PreviewSuspense';
 import { client } from '../../lib/sanity.client';
+import '../../styles/globals.css';
 import Banner from './Banner';
 import BlogList from './BlogList';
 
@@ -32,8 +33,9 @@ export default async function Home() {
 	}
 
 	const posts = await client.fetch(query);
+
 	return (
-		<div className="max-w-7xl mx-auto">
+		<div className="max-w-7xl mx-auto pb-20">
 			{/* Banner */}
 			<Banner />
 			{/* Blog Posts */}

@@ -25,7 +25,7 @@ async function Post({ params: { slug } }: Props) {
 
 	return (
 		<article className="min-h-screen px-10 pt-40 pb-40 max-w-7xl mx-auto">
-			<section className="space-y-2 mb-10 border border-[#1f5673] text-white">
+			<section className="space-y-2 mb-10 border border-[#16A34A] text-black">
 				<div className="relative min-h-56 flex flex-col md:flex-row justify-between">
 					<div className="absolute top-0 w-full h-full opacity-10 blur-sm p-10">
 						<Image
@@ -36,7 +36,7 @@ async function Post({ params: { slug } }: Props) {
 						/>
 					</div>
 
-					<section className="p-5 bg-[#1f5673]/40 w-full">
+					<section className="p-5 bg-[#16A34A]/40 w-full">
 						<div className="flex flex-col md:flex-row justify-between gap-y-5">
 							<div>
 								<h1 className="text-4xl font-extrabold" key={post.title}>
@@ -52,18 +52,16 @@ async function Post({ params: { slug } }: Props) {
 								</p>
 							</div>
 
-							<div className="flex items-center space-x-2">
-								<Image
-									className="rounded-full"
-									src={urlFor(post.author.image).url()}
-									alt={post.author.name}
-									height={40}
-									width={40}
-								/>
-
-								<div className="w-64">
+							<div className="flex items-center justify-between space-x-2">
+								<div className="w-64 flex items-center justify-end">
+									<Image
+										className="rounded-full"
+										src={urlFor(post.author.image).url()}
+										alt={post.author.name}
+										height={40}
+										width={40}
+									/>
 									<h3 className="text-lg font-bold">{post.author.name}</h3>
-									<div>{/* TODO: Author BIO */}</div>
 								</div>
 							</div>
 						</div>
@@ -75,7 +73,7 @@ async function Post({ params: { slug } }: Props) {
 							<div className="flex items-center justify-end mt-auto space-x-2">
 								{post.categories.map((category) => (
 									<p
-										className="bg-gray-800 text-white px-3 py-1 rounded-full text-sm font-semibold mt-4"
+										className="bg-[#16A34A] text-black px-5 py-1 rounded-full text-sm font-semibold mt-4"
 										key={category.title}
 									>
 										{category.title}

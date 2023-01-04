@@ -11,39 +11,49 @@ type Props = {
 function BlogList({ posts }: Props) {
 	return (
 		<div className="max-w-7xl mx-auto">
-			<hr className="border-[#759fbc] mb-10" />
+			<hr className="border-[#16A34A] mb-10" />
 
 			<div
-				className="grid grid-cols-1 md:grid-cols-2 px-10 gap-10 gap-y-16 pt-40 pb-40"
+				className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6 p-2 md:p-6"
 				key={posts._id}
 			>
 				{/* Posts */}
 				{posts.map((post) => (
 					<ClientSideRoute key={post._id} route={`/${post.slug.current}`}>
 						<div className="flex flex-col group cursor-pointer">
-							<div className="relative w-full h-80 drop-shadow-xl group-hover:scale-105 transition-transform duration-200 ease-out">
+							<div className="relative w-full h-80 drop-shadow-xl group-hover:scale-105 transition-transform duration-200 ease-in-out rounded-sm">
 								<Image
-									className="object-cover object-left lg:object-center"
-									src={urlFor(post.mainImage).url()}
+									className="h-60 w-full border rounded-lg object-cover object-left lg:object-center"
+									src={urlFor(post.mainImage).url()!}
 									alt={post.author.name}
 									fill
 								/>
-								<div className="absolute bottom-0 w-full bg-opacity-20 bg-black backdrop-blur-lg rounded drop-shadow-lg text-white p-5 flex justify-between">
+								<div className="absolute bottom-0 w-full bg-opacity-30 bg-white backdrop-blur-sm rounded-lg drop-shadow-lg p-5 flex justify-between">
 									<div>
-										<p className="font-bold">{post.title}</p>
-										<p>
+										<p className="text-lg font-bold">{post.title}</p>
+										<p className="text-xs">
 											{new Date(post._createdAt).toLocaleDateString('en-US', {
 												day: 'numeric',
 												month: 'long',
 												year: 'numeric',
 											})}
 										</p>
+										<p className="flex items-center">
+											<Image
+												className="rounded-full"
+												src={urlFor(post.author.image).url()!}
+												width={48}
+												height={48}
+												alt={post.author.name}
+											/>{' '}
+											{post.author.name}
+										</p>
 									</div>
 
 									<div className="flex flex-col md:flex-row gap-y-2 md:gap-x-2 items-center">
 										{post.categories.map((category) => (
 											<div
-												className="bg-[#759fbc] text-center text-black px-3 py-1 rounded-full text-sm font-semibold"
+												className="bg-[#16A34A] text-center text-black px-3 py-1 rounded-full text-sm font-semibold"
 												key={category.title}
 											>
 												<p>{category.title}</p>

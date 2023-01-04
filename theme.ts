@@ -3,7 +3,7 @@ import { buildLegacyTheme } from 'sanity';
 const props = {
 	'--my-white': '#f4f4f4',
 	'--my-black': '#1a1a1a',
-	'--kf-brand': '#759fbc',
+	'--brand': '#16A34A',
 	'--my-red': '#db4437',
 	'--my-yellow': '#f4b400',
 	'--my-green': '#0f9d58',
@@ -21,17 +21,17 @@ export const myTheme = buildLegacyTheme({
 	'--component-text-color': props['--my-white'],
 
 	/* Brand */
-	'--brand-primary': props['--kf-brand'],
+	'--brand-primary': props['--brand'],
 
 	// Default button
 	'--default-button-color': '#666',
-	'--default-button-primary-color': props['--kf-brand'],
+	'--default-button-primary-color': props['--brand'],
 	'--default-button-success-color': props['--my-green'],
 	'--default-button-warning-color': props['--my-yellow'],
 	'--default-button-danger-color': props['--my-red'],
 
 	/* State */
-	'--state-info-color': props['--kf-brand'],
+	'--state-info-color': props['--brand'],
 	'--state-success-color': props['--my-green'],
 	'--state-warning-color': props['--my-yellow'],
 	'--state-danger-color': props['--my-red'],
@@ -40,5 +40,5 @@ export const myTheme = buildLegacyTheme({
 	'--main-navigation-color': props['--my-black'],
 	'--main-navigation-color--inverted': props['--my-white'],
 
-	'--focus-color': props['--kf-brand'],
+	'--focus-color': props['--brand'],
 });
