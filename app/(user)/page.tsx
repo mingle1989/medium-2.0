@@ -1,35 +1,43 @@
-import type { NextPage } from 'next';
-import Image from 'next/image';
-import MLogo from '../../public/assets/images/M.png';
+import { groq } from 'next-sanity';
+import { previewData } from 'next/headers';
+import PreviewBlogList from '../(admin)/PreviewBlogList';
+import PreviewSuspense from '../(admin)/PreviewSuspense';
+import { client } from '../../lib/sanity.client';
+import Banner from './Banner';
+import BlogList from './BlogList';
 
-const Home: NextPage = () => {
+const query = groq`
+	*[_type=='post'] {
+		...,
+		author->,
+		categories[]->
+	} | order(_createdAt desc)
+`;
+
+export default async function Home() {
+	if (previewData()) {
+		return (
+			<PreviewSuspense
+				fallback={
+					<div role="status">
+						<p className="text-center text-lg animate-pulse text-[#1f5673]">
+							Loading Preview Data...
+						</p>
+					</div>
+				}
+			>
+				<PreviewBlogList query={query} />
+			</PreviewSuspense>
+		);
+	}
+
+	const posts = await client.fetch(query);
 	return (
 		<div className="max-w-7xl mx-auto">
 			{/* Banner */}
-			<div className="flex justify-between items-center bg-yellow-400 border-y border-black py-10 lg:py-0">
-				<div className="px-10 space-y-5">
-					<h1 className="text-6xl max-w-xl font-serif">
-						<span className="underline decoration-black decoration-4">
-							Medium
-						</span>{' '}
-						is a place to write, read, and connect
-					</h1>
-					<h2>
-						It's easy and free to post your thoughts on any topic and connect
-						with millions of readers.
-					</h2>
-				</div>
-
-				<div>
-					<div className="hidden md:inline-flex w-48 lg:w-full h-48 lg:h-full">
-						<Image src={MLogo} alt="MLogo" />
-					</div>
-				</div>
-			</div>
-
-			{/* Posts */}
+			<Banner />
+			{/* Blog Posts */}
+			<BlogList posts={posts} />
 		</div>
 	);
-};
-
-export default Home;
+}
